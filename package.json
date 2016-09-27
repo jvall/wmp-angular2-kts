@@ -1,0 +1,29 @@
+{
+  "name": "wmp-spotify-angular2",
+  "version": "1.0.0",
+  "description": "A simple plunker demonstrating Angular2 usage: - Uses SystemJS + TypeScript to compile on the fly - Includes binding, directives, http, pipes, and DI usage.",
+  "main": "config.js",
+  "scripts": {
+    "start": "browser-sync start --config bs-config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.16.0"
+  },
+  "dependencies": {
+    "@angular/common": "^2.0.1",
+    "@angular/compiler": "^2.0.1",
+    "@angular/core": "^2.0.1",
+    "@angular/forms": "^2.0.1",
+    "@angular/http": "^2.0.1",
+    "@angular/platform-browser": "^2.0.1",
+    "@angular/platform-browser-dynamic": "^2.0.1",
+    "@angular/router": "^3.0.1",
+    "@angular/upgrade": "^2.0.1",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "^5.0.0-beta.12",
+    "zone.js": "^0.6.25"
+  }
+}

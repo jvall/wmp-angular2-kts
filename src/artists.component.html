@@ -1,0 +1,16 @@
+<h1>Artist Management</h1>
+<section *ngIf="artists && artists.length > 0">
+    <h2>Saved Artists</h2>
+    <div *ngFor="let artist of artists">
+        <span>{{artist.name}}</span>
+        <span *ngIf="artist.rating > 0">{{artist.rating}} stars</span>
+        <button (click)="editMode(artist)" [disabled]="selectedArtist">Edit</button>
+        <button (click)="delete(artist.id)">Delete</button>
+        <button (click)="play(artist)">Play (using Spotify)</button>
+    </div>
+</section>
+<hr />
+<button (click)="addArtist()">Add New Artist</button>
+<hr />
+<artist-detail *ngIf='selectedArtist' [model]='selectedArtist' (onSaved)="onSaved($event)" (onCanceled)="onCanceled()"></artist-detail>
+<spotify-player *ngIf='playingArtist' [artistInfo]='playingArtist' (playerClosed)="closePlayer($event)"></spotify-player>

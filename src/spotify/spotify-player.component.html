@@ -1,0 +1,11 @@
+<section *ngIf='topTrack'>
+    <hr />
+    <h2>Now Playing</h2>
+    
+    <div>Track: {{ topTrack.name }}</div>
+    <div>Album: {{ topTrack.album.name }}</div>
+    <div><img [src]='topTrack.album.images[2].url' /></div>
+    <audio autoplay controls [src]="topTrack.preview_url"></audio>
+    <br />
+    <button (click)="closePlayer()">Close Player</button>
+</section>
