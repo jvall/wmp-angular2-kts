@@ -1,15 +1,17 @@
-
-        <section *ngIf='topTrack' class="card" style="width:302px">
-            <img class="card-img-top" [src]='topTrack.album.images[1].url' />
+<div class="row">
+    <div class="col-xs-12 col-md-7">
+        <section *ngIf='topTrack' class="card">
+            <img class="card-img-top" [src]='topTrack.album.images[0].url' class="img-fluid" />
             <div class="card-block">
                 <h2 class="card-title">Now Playing</h2>
 
                 <div>Track: {{ topTrack.name }}</div>
                 <div>Album: {{ topTrack.album.name }}</div>
+                <audio autoplay controls [src]="topTrack.preview_url"></audio>
             </div>
-
-            <audio autoplay controls [src]="topTrack.preview_url"></audio>
             <div class="card-block text-xs-center">
-                <button (click)="closePlayer()" class="btn btn-secondary">Close Player</button>
+                <button (click)="closePlayer()" class="btn btn-secondary btn-sm">Close Player</button>
             </div>
         </section>
+    </div>
+</div>
