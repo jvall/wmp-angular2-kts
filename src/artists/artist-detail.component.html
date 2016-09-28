@@ -44,7 +44,7 @@
 
     <section *ngIf="selectedArtist" class="selectedArtistInfo">
         <h2>{{selectedArtist.name}}</h2>
-        <img *ngIf='selectedArtist.images && selectedArtist.images.length > 0' [src]='selectedArtist.images[1].url' class="img-fluid"/>
+        <img *ngIf='selectedArtist.images && selectedArtist.images.length > 0' [src]='selectedArtist.images[0].url' class="img-fluid"/>
     </section>
     <section *ngIf="artistsNotFound" class="artistNotFound">
         <h2>No matches found, try a different artist</h2>

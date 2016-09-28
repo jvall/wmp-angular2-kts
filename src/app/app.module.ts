@@ -9,13 +9,14 @@ import {ArtistsComponent} from './../artists/artists.component';
 import {ArtistDetailComponent} from './../artists/artist-detail.component';
 import {ArtistsService} from './../artists/artists.service';
 
+import {SpotifyArtistInfoComponent} from './../spotify/spotify-artist-info.component';
 import {SpotifyPlayerComponent} from './../spotify/spotify-player.component';
 import {SpotifyService} from './../spotify/spotify.service';
 
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpModule],
-  declarations: [App, ArtistsComponent, ArtistDetailComponent, SpotifyPlayerComponent],
+  declarations: [App, ArtistsComponent, ArtistDetailComponent, SpotifyPlayerComponent, SpotifyArtistInfoComponent],
   providers: [SpotifyService, ArtistsService, {provide:APP_CONFIG, useValue: APP_DI_CONFIG}],
   bootstrap: [App]
 })
