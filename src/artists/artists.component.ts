@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ArtistInfo} from './artist-info'
-import {SpotifyArtistModel} from './spotify/spotify.artist.model';
+import {SpotifyArtistModel} from './../spotify/spotify.artist.model';
 import {ArtistsService} from './artists.service';
 
 @Component({
     selector: 'artists',
-    templateUrl: 'src/artists.component.html'
+    templateUrl: 'src/artists/artists.component.html',
+    styleUrls: ['src/artists/artists.component.css']
 })
 export class ArtistsComponent implements OnInit {
     constructor(private artistsService: ArtistsService) {
@@ -40,9 +41,10 @@ export class ArtistsComponent implements OnInit {
     public onSaved(event: SpotifyArtistModel) {
         console.log('onSaved');
         if (this.mode === "add") {
-            this.artists.push(this.selectedArtist);
+            let newArtist = this.selectedArtist;
+            this.artists.push(newArtist);
             this.artistsService.createArtist(this.selectedArtist).subscribe(res => {
-                console.log("saved");
+                this.artists[this.artists.indexOf(newArtist)].id = res.id;
             });
         }else{
             this.artistsService.updateArtist(this.selectedArtist.id, this.selectedArtist).subscribe(res => {

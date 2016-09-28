@@ -1,11 +1,11 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {SpotifyService} from './spotify/spotify.service';
-import {SpotifyArtistSearchResponse, SpotifyArtistModel} from './spotify/spotify.artist.model';
+import {SpotifyService} from './../spotify/spotify.service';
+import {SpotifyArtistSearchResponse, SpotifyArtistModel} from './../spotify/spotify.artist.model';
 import {ArtistInfo} from './artist-info';
 
 @Component({
     selector: 'artist-detail',
-    templateUrl: 'src/artist-detail.component.html'
+    templateUrl: 'src/artists/artist-detail.component.html'    
 })
 export class ArtistDetailComponent {
     constructor(private spotifyService: SpotifyService) {
@@ -57,12 +57,9 @@ export class ArtistDetailComponent {
         });
     }
     private setSelectedArtist() {
-        if (this.spotifySearchResult && this.spotifySearchResult.artists && this.spotifySearchResult.artists.total > 0) {
+        if (this.spotifySearchResult && this.spotifySearchResult.artists && this.spotifySearchResult.artists.total > 0) {                 
             this.selectedArtist = this.spotifySearchResult.artists.items[0];
-            if (this.selectedArtist.id !== this.model.id) {
-                this.model.name = this.selectedArtist.name;
-                this.model.rating = null;
-            }
+          
         } else {
             this.selectedArtist = null;
             this.artistsNotFound = true;

@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {ArtistInfo} from './../artist-info'
+import {ArtistInfo} from './../artists/artist-info'
 import {SpotifyService} from './spotify.service';
 import {SpotifyTopTracksSearchResponse, SpotifyTrack} from './spotify.artist.model';
 

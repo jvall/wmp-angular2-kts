@@ -1,0 +1,37 @@
+<section *ngIf="model" class="artistDetailForm" class="card card-block">
+    <form (ngSubmit)="onSave()" #detailForm="ngForm">
+        <h2>Artist</h2>
+        <div *ngIf="model.id">ID: {{model.id}}</div>
+        <div class="form-group">
+
+            <label for="editName">Name: </label>
+            <div class="input-group">
+                <input type="text" id="editName" name="artistName" [(ngModel)]="model.name" placeholder="Artist Name" required #name="ngModel"
+                    class="form-control" />
+                <!--<div [hidden]="name.valid || name.pristine">
+                Name is required
+            </div>-->
+                <span class="input-group-btn">
+            <button type="button" (click)="selectArtist()" [disabled]="name.pristine || name.invalid" class="btn btn-secondary">Find artist</button>
+            </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="editRating">Rating: </label>
+            <input type="range" id="editRating" name="rating" [(ngModel)]="model.rating" min="0" max="5" step="0" required class="form-control"/>            
+        </div>
+        <div class="form-group">
+            <button type="submit" [disabled]="!selectedArtist || detailForm.invalid || detailForm.pristine" class="btn btn-primary">Save</button>
+            <button type="button" (click)="onCancel()" class="btn btn-primary">Cancel</button>
+        </div>
+
+    </form>
+
+    <section *ngIf="selectedArtist" class="selectedArtistInfo">
+        <h2>{{selectedArtist.name}}</h2>
+        <img *ngIf='selectedArtist.images && selectedArtist.images.length > 0' [src]='selectedArtist.images[1].url' />
+    </section>
+    <section *ngIf="artistsNotFound" class="artistNotFound">
+        <h2>No matches found, try a different artist</h2>
+    </section>
+</section>

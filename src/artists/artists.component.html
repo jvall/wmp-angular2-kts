@@ -1,0 +1,26 @@
+<h1 class="display-4">Artist Management</h1>
+<section class="card card-block">
+    <div>
+        <span class="h4 text-muted">Saved Artists
+        <button (click)="addArtist()" class="btn btn-secondary btn-sm">Add New Artist</button>
+        </span>
+    </div>
+    <div class="list-group card-block" *ngIf="artists && artists.length > 0">
+        <div *ngFor="let artist of artists" class="artist-list-item list-group-item clearfix" [class.active]="this.selectedArtist == artist">
+            <span class="pull-xs-left">
+                <div class="artist-name">{{artist.name}}</div>
+                <div class="artists-rating" *ngIf="artist.rating > 0">{{artist.rating}} stars</div>
+            </span>
+            <span class="artist-item-buttons btn-group btn-sm pull-xs-right" role="group">
+                <button (click)="editMode(artist)" [disabled]="artist == selectedArtist" class="btn btn-secondary btn-sm">Edit</button>
+                <button (click)="delete(artist.id)" class="btn btn-secondary btn-sm">Delete</button>
+                <button (click)="play(artist)" [disabled]="artist == playingArtist" class="btn btn-secondary btn-sm">Play (using Spotify)</button>
+            </span>
+        </div>
+
+    </div>
+    <div class="card-block" *ngIf="artists && artists.length < 1">No artists, please add one to get started.</div>
+</section>
+
+<artist-detail *ngIf='selectedArtist' [model]='selectedArtist' (onSaved)="onSaved($event)" (onCanceled)="onCanceled()"></artist-detail>
+<spotify-player *ngIf='playingArtist' [artistInfo]='playingArtist' (playerClosed)="closePlayer($event)"></spotify-player>
