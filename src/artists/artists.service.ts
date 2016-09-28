@@ -1,14 +1,16 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import './../rx-js.extensions';
+import {APP_CONFIG, AppConfig} from './../app/app.config';
+
 import {ArtistInfo} from './artist-info';
 
 @Injectable()
 export class ArtistsService {
-    private apiUrl: string = 'http://angulardotnetch22.azurewebsites.net/';
-    constructor(private http: Http) {
-
+    private apiUrl: string;
+    constructor(private http: Http, @Inject(APP_CONFIG)private appConfig:AppConfig) {
+        this.apiUrl = this.appConfig.apiUrl;
     }
     public getArtists(): Observable<ArtistInfo[]> {
         return this.http.get(this.apiUrl + "api/artists").map(r => r.json() as ArtistInfo[]);

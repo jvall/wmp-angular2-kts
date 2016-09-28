@@ -1,15 +1,17 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import './../rx-js.extensions';
+import {APP_CONFIG, AppConfig} from './../app/app.config';
 
 import {SpotifyArtistSearchResponse, SpotifyTopTracksSearchResponse, SpotifyArtistModel} from './spotify.artist.model';
 
 @Injectable()
 export class SpotifyService {
-    private spotifyUrl: string = "https://api.spotify.com/v1/";
-    constructor(private http: Http) {
-
+    private spotifyUrl: string;
+    
+    constructor(private http: Http, @Inject(APP_CONFIG)private appConfig:AppConfig) {
+        this.spotifyUrl = this.appConfig.spotifyUrl;
     }
 
     public getSpotifyArtistIdByName(name: string): Observable<SpotifyArtistSearchResponse> {
@@ -17,8 +19,7 @@ export class SpotifyService {
         var getResponseObservable = this.http.get(uri)
             .map((r: Response) => {
                 return r.json() as SpotifyArtistSearchResponse
-            }
-            );
+            });
         return getResponseObservable;
     }
     public getTopTrackForArtist(id: string) {
