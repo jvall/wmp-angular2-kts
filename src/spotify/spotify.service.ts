@@ -16,7 +16,6 @@ export class SpotifyService {
         var uri = this.spotifyUrl + "search?q=" + name + "&type=artist"
         var getResponseObservable = this.http.get(uri)
             .map((r: Response) => {
-                console.log(r);
                 return r.json() as SpotifyArtistSearchResponse
             }
             );
@@ -26,14 +25,14 @@ export class SpotifyService {
         var url = this.spotifyUrl + "artists/" + id + "/top-tracks?country=US";
         return this.http.get(url).map((r: Response) => {
             return r.json() as SpotifyTopTracksSearchResponse;
-        });        
+        });
 
     }
-        public getArtist(id: string) {
+    public getArtist(id: string) {
         var url = this.spotifyUrl + "artists/" + id;
         return this.http.get(url).map((r: Response) => {
             return r.json() as SpotifyArtistModel;
-        });        
+        });
 
     }
 }
