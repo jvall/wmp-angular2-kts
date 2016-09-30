@@ -5,7 +5,8 @@ import {ArtistInfo} from './artist-info';
 
 @Component({
     selector: 'artist-detail',
-    templateUrl: 'src/artists/artist-detail.component.html'    
+    templateUrl: 'src/artists/artist-detail.component.html',
+    styleUrls: ['src/artists/artist-detail.component.css']
 })
 export class ArtistDetailComponent {
     constructor(private spotifyService: SpotifyService) {
