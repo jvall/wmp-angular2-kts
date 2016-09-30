@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ArtistInfo} from './artist-info'
 import {SpotifyArtistModel} from './../spotify/spotify.artist.model';
 import {ArtistsService} from './artists.service';
+import {ArtistsListComponent} from  './artists-list.component';
 
 @Component({
     selector: 'artists',
@@ -15,11 +16,17 @@ export class ArtistsComponent implements OnInit {
     public ngOnInit() {
         this.getArtists();
     }
+    
+    @ViewChild(ArtistsListComponent)
+    private artistsListComponent:ArtistsListComponent;
+
+    
     artists: ArtistInfo[];
-    showDetail: boolean = false;
     private mode: string;
-    selectedArtist: ArtistInfo = null;
+
     playingArtist: ArtistInfo = null;
+
+    
 
     public getArtists() {
         this.artistsService.getArtists().subscribe((artists) => {
@@ -27,29 +34,16 @@ export class ArtistsComponent implements OnInit {
         });
     }
 
-    public addArtist() {
-        this.selectedArtist = new ArtistInfo();
-        this.mode = "add";
-        this.showDetails();
-    }
-    public editMode(artist) {
-        this.selectedArtist = artist;
-        this.showDetails();
-        this.mode = "edit";
-        console.log('editing...');
-    }
-    public onSaved(event: SpotifyArtistModel) {
-        console.log('onSaved');
+   
+    public onSaved(event: SpotifyArtistModel, artistInfo:ArtistInfo) {
         if (this.mode === "add") {
-            let newArtist = this.selectedArtist;
+            let newArtist = artistInfo;
             this.artists.push(newArtist);
-            this.artistsService.createArtist(this.selectedArtist).subscribe(res => {
+            this.artistsService.createArtist(newArtist).subscribe(res => {
                 this.artists[this.artists.indexOf(newArtist)].id = res.id;
             });
         }else{
-            this.artistsService.updateArtist(this.selectedArtist.id, this.selectedArtist).subscribe(res => {
-                  console.log("saved");
-            });
+            this.artistsService.updateArtist(artistInfo.id, artistInfo).subscribe(res => {});
         }
         this.resetMode();
     }
@@ -57,29 +51,22 @@ export class ArtistsComponent implements OnInit {
         this.resetMode();
     }
     private resetMode() {
-        this.selectedArtist = null;
+        this.artistsListComponent.selectedArtist = null;
         this.mode = null;
     }
+    public add() {
+        this.mode = "add";
+        this.artistsListComponent.selectedArtist = new ArtistInfo();
+    }
+    public edit(artist:ArtistInfo){
+        this.mode = "edit";        
+    }
     public delete(id) {
+        console.log('deleting...');
         this.artistsService.deleteArtist(id).subscribe(res => console.log('deleted'));
         this.artists = this.artists.filter((artist) => {
             return artist.id !== id;
         });
-        console.log('deleted...');
-    }
-
-    public play(artist) {
-        this.playingArtist = artist;
-    }
-    public closePlayer(event: boolean) {
-        this.playingArtist = null;
-    }
-
-    private showDetails() {
-        this.showDetail = true;
-    }
-    private hideDetails() {
-        this.showDetail = false;
     }
 }
 

@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import {App} from './app.component';
 import {APP_CONFIG, APP_DI_CONFIG} from './app.config';
 import {ArtistsComponent} from './../artists/artists.component';
+import {ArtistsListComponent} from './../artists/artists-list.component';
 import {ArtistDetailComponent} from './../artists/artist-detail.component';
 import {ArtistsService} from './../artists/artists.service';
 
@@ -16,7 +17,7 @@ import {SpotifyService} from './../spotify/spotify.service';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpModule],
-  declarations: [App, ArtistsComponent, ArtistDetailComponent, SpotifyPlayerComponent, SpotifyArtistInfoComponent],
+  declarations: [App, ArtistsComponent, ArtistDetailComponent, ArtistsListComponent, SpotifyPlayerComponent, SpotifyArtistInfoComponent],
   providers: [SpotifyService, ArtistsService, {provide:APP_CONFIG, useValue: APP_DI_CONFIG}],
   bootstrap: [App]
 })

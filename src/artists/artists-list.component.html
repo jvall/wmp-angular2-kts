@@ -1,0 +1,19 @@
+<section class="list-group" *ngIf="artists && artists.length > 0">
+    <div *ngFor="let artist of artists" class="artist-list-item list-group-item clearfix" [class.active]="this.selectedArtist == artist">
+        <div class="row">
+            <span class="col-xs-6 col-sm-3">
+                <spotify-artist-info [artistInfo]='artist'></spotify-artist-info>
+            </span>
+            <span class="pull-xs-left col-xs-6">                
+                <div class="artist-name">{{artist.name}}</div>
+                <div class="artists-rating" *ngIf="artist.rating > 0">{{artist.rating}} stars</div>
+            </span>
+            <span class="col-xs artist-item-buttons btn-group btn-sm pull-xs-right" role="group">
+                <button (click)="edit(artist)" [disabled]="artist == selectedArtist" class="btn btn-secondary btn-sm">Edit</button>
+                <button (click)="delete(artist.id)" class="btn btn-secondary btn-sm">Delete</button>
+                <button (click)="play(artist)" [disabled]="artist == playingArtist" class="btn btn-secondary btn-sm">Play</button>
+            </span>
+        </div>
+    </div>
+</section>
+<div class="card-block" *ngIf="artists && artists.length < 1">No artists, please add one to get started.</div>
