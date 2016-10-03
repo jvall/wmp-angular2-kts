@@ -7,7 +7,6 @@ import {ArtistsListComponent} from  './artists-list.component';
 @Component({
     selector: 'artists',
     templateUrl: 'src/artists/artists.component.html',
-    styleUrls: ['src/artists/artists.component.css']
 })
 export class ArtistsComponent implements OnInit {
     constructor(private artistsService: ArtistsService) {
