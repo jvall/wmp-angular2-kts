@@ -1,7 +1,7 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {SpotifyService} from './../spotify/spotify.service';
-import {SpotifyArtistSearchResponse, SpotifyArtistModel} from './../spotify/spotify.artist.model';
-import {ArtistInfo} from './artist-info';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { SpotifyService } from './../spotify/spotify.service';
+import { SpotifyArtistSearchResponse, SpotifyArtistModel } from './../spotify/spotify.artist.model';
+import { ArtistInfo } from './artist-info';
 
 @Component({
     selector: 'artist-detail',
@@ -51,16 +51,16 @@ export class ArtistDetailComponent {
     }
     public selectArtist() {
         this.artistsNotFound = false;
-        var query = this.spotifyService.getSpotifyArtistIdByName(this.model.name);
+        let query = this.spotifyService.getSpotifyArtistIdByName(this.model.name);
         query.subscribe((val: SpotifyArtistSearchResponse) => {
             this.spotifySearchResult = val;
             this.setSelectedArtist();
         });
     }
     private setSelectedArtist() {
-        if (this.spotifySearchResult && this.spotifySearchResult.artists && this.spotifySearchResult.artists.total > 0) {                 
+        if (this.spotifySearchResult && this.spotifySearchResult.artists && this.spotifySearchResult.artists.total > 0) {
             this.selectedArtist = this.spotifySearchResult.artists.items[0];
-          
+
         } else {
             this.selectedArtist = null;
             this.artistsNotFound = true;
